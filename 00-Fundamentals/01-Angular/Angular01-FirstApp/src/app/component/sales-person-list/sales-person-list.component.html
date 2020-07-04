@@ -1,0 +1,26 @@
+<p>
+  {{ salesPersonList[0].firstName }} {{ salesPersonList[0].lastName }}
+</p>
+<table class="table table-hover">
+  <thead class="thead-dark">
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Email</th>
+    <th>Sales</th>
+    <th>Met quota</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let person of salesPersonList" [ngClass]="{'highlight': person.salesVolume >= 450000}">
+    <td>{{ person.firstName }}</td>
+    <td>{{ person.lastName }}</td>
+    <td>{{ person.email }}</td>
+    <td>{{ person.salesVolume | currency: 'USD' }}</td>
+    <td>
+      <div *ngIf="person.salesVolume >= 450000, else noQuota" >Yes</div>
+      <ng-template #noQuota>No</ng-template>
+    </td>
+  </tr>
+  </tbody>
+</table>
